@@ -1,65 +1,143 @@
-# Svelte library
+# svelte-layout-grid
 
-Everything you need to build a Svelte library, powered by [`sv`](https://npmjs.com/package/sv).
+Draggable, resizable, responsive grid layouts for Svelte 5. The package is built as a Svelte library, ships typed components, and keeps the public API split into explicit subpath exports so apps can import only what they use.
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+## Install
 
 ```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+pnpm add svelte-layout-grid
 ```
-
-To recreate this project with the same configuration:
 
 ```sh
-# recreate this project
-npx sv@0.15.3 create --template library --types ts --add tailwindcss="plugins:none" --no-install svelte-layout
+npm install svelte-layout-grid
 ```
 
-## Developing
+## Basic Usage
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```svelte
+<script lang="ts">
+  import { GridLayout, WidthProvider, type Layout } from "svelte-layout-grid";
 
-```sh
-npm run dev
+  let layout = $state<Layout>([
+    { i: "revenue", x: 0, y: 0, w: 4, h: 2 },
+    { i: "pipeline", x: 4, y: 0, w: 4, h: 2 },
+    { i: "alerts", x: 8, y: 0, w: 4, h: 2 },
+  ]);
+</script>
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+<WidthProvider>
+  {#snippet children(width)}
+    <GridLayout
+      bind:layout
+      {width}
+      gridConfig={{
+        cols: 12,
+        rowHeight: 64,
+        margin: [12, 12],
+        containerPadding: [12, 12],
+      }}
+      resizeConfig={{ enabled: true, handles: ["se", "e", "s"] }}
+    >
+      {#snippet children(item)}
+        <section class="card">
+          {item.i}: {item.w} x {item.h}
+        </section>
+      {/snippet}
+    </GridLayout>
+  {/snippet}
+</WidthProvider>
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+`GridLayout` is controlled with `bind:layout`. Each item needs a stable `i` key plus `x`, `y`, `w`, and `h` grid units.
 
-## Building
+## Responsive Layouts
 
-To build your library:
+```svelte
+<script lang="ts">
+  import { ResponsiveGridLayout, WidthProvider, type ResponsiveLayouts } from "svelte-layout-grid";
 
-```sh
-npm pack
+  let layouts = $state<ResponsiveLayouts>({
+    lg: [
+      { i: "inbox", x: 0, y: 0, w: 3, h: 2 },
+      { i: "timeline", x: 3, y: 0, w: 9, h: 2 },
+    ],
+    xs: [
+      { i: "inbox", x: 0, y: 0, w: 4, h: 2 },
+      { i: "timeline", x: 0, y: 2, w: 4, h: 2 },
+    ],
+  });
+</script>
+
+<WidthProvider>
+  {#snippet children(width)}
+    <ResponsiveGridLayout
+      bind:layouts
+      {width}
+      breakpoints={{ lg: 1100, xs: 0 }}
+      cols={{ lg: 12, xs: 4 }}
+      rowHeight={58}
+    >
+      {#snippet children(item)}
+        <article>{item.i}</article>
+      {/snippet}
+    </ResponsiveGridLayout>
+  {/snippet}
+</WidthProvider>
 ```
 
-To create a production version of your showcase app:
+## Public Exports
 
-```sh
-npm run build
+Use the root entry for the common API:
+
+```ts
+import {
+  GridLayout,
+  ResponsiveGridLayout,
+  WidthProvider,
+  GridBackground,
+  type Layout,
+  type LayoutItem,
+  type ResponsiveLayouts,
+} from "svelte-layout-grid";
 ```
 
-You can preview the production build with `npm run preview`.
+Use subpath entry points when you want a narrower import surface:
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```ts
+import { GridLayout, type Layout } from "svelte-layout-grid/grid-layout";
+import { Draggable } from "svelte-layout-grid/draggable";
+import { Resizable } from "svelte-layout-grid/resizable";
+import { getCompactor } from "svelte-layout-grid/core";
+```
+
+The package export map is explicit. Internal reference code and demo routes are not exported, and `dist/react-version/**` is excluded from the npm package.
+
+## Grid Behavior
+
+The main configuration objects are:
+
+- `gridConfig`: `cols`, `rowHeight`, `margin`, `containerPadding`, `maxRows`
+- `dragConfig`: `enabled`, `bounded`, `handle`, `cancel`, `threshold`, `collisionThreshold`
+- `resizeConfig`: `enabled`, `handles`
+- `dropConfig`: external drop support
+- `compactor`: vertical, horizontal, wrap, overlap, or custom compaction strategies
+
+`dragConfig.collisionThreshold` controls how much actual pixel overlap is required before a drag reflows colliding items. The default is `0.25`; set it to `0` for immediate collision resolution.
 
 ## Publishing
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
+The package name is set to `svelte-layout-grid` and `publishConfig.access` is public. Build and inspect the package before publishing:
 
-To publish your library to [npm](https://www.npmjs.com):
+```sh
+pnpm pack
+```
 
 ```sh
 npm publish
+```
+
+This project uses Vite+. Run checks with:
+
+```sh
+vpx sv check
 ```

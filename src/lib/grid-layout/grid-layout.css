@@ -1,0 +1,124 @@
+.svelte-grid-layout {
+  position: relative;
+  transition: height 200ms ease;
+}
+.svelte-grid-item {
+  transition: all 200ms ease;
+  transition-property: left, top, width, height;
+}
+.svelte-grid-item img {
+  pointer-events: none;
+  user-select: none;
+}
+.svelte-grid-item.cssTransforms {
+  transition-property: transform, width, height;
+}
+.svelte-grid-item.resizing {
+  transition: none;
+  z-index: 100 !important;
+  will-change: width, height;
+}
+
+.svelte-grid-item.svelte-draggable-dragging {
+  transition: none;
+  z-index: 100 !important;
+  will-change: transform;
+}
+
+.svelte-grid-item.dropping {
+  visibility: hidden;
+}
+
+.svelte-grid-item.svelte-grid-placeholder {
+  background: red;
+  opacity: 0.2;
+  transition-duration: 100ms;
+  z-index: 2;
+  user-select: none;
+}
+
+.svelte-grid-item.svelte-grid-placeholder.placeholder-resizing {
+  transition: none;
+}
+
+.svelte-grid-item .svelte-resizable-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+}
+
+.svelte-grid-item:hover .svelte-resizable-handle {
+  opacity: 1;
+}
+
+.svelte-grid-item .svelte-resizable-handle::after {
+  content: "";
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 5px;
+  height: 5px;
+  border-right: 2px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+}
+
+.svelte-resizable-hide .svelte-resizable-handle {
+  display: none;
+}
+
+.svelte-grid-item .svelte-resizable-handle.svelte-resizable-handle-sw {
+  bottom: 0;
+  left: 0;
+  cursor: sw-resize;
+  transform: rotate(90deg);
+}
+.svelte-grid-item .svelte-resizable-handle.svelte-resizable-handle-se {
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
+}
+.svelte-grid-item .svelte-resizable-handle.svelte-resizable-handle-nw {
+  top: 0;
+  left: 0;
+  cursor: nw-resize;
+  transform: rotate(180deg);
+}
+.svelte-grid-item .svelte-resizable-handle.svelte-resizable-handle-ne {
+  top: 0;
+  right: 0;
+  cursor: ne-resize;
+  transform: rotate(270deg);
+}
+.svelte-grid-item .svelte-resizable-handle.svelte-resizable-handle-w,
+.svelte-grid-item .svelte-resizable-handle.svelte-resizable-handle-e {
+  top: 50%;
+  margin-top: -10px;
+  cursor: ew-resize;
+}
+.svelte-grid-item .svelte-resizable-handle.svelte-resizable-handle-w {
+  left: 0;
+  transform: rotate(135deg);
+}
+.svelte-grid-item .svelte-resizable-handle.svelte-resizable-handle-e {
+  right: 0;
+  transform: rotate(315deg);
+}
+.svelte-grid-item .svelte-resizable-handle.svelte-resizable-handle-n,
+.svelte-grid-item .svelte-resizable-handle.svelte-resizable-handle-s {
+  left: 50%;
+  margin-left: -10px;
+  cursor: ns-resize;
+}
+.svelte-grid-item .svelte-resizable-handle.svelte-resizable-handle-n {
+  top: 0;
+  transform: rotate(225deg);
+}
+.svelte-grid-item .svelte-resizable-handle.svelte-resizable-handle-s {
+  bottom: 0;
+  transform: rotate(45deg);
+}
+
+.svelte-grid-layout-width-provider {
+  position: relative;
+}
