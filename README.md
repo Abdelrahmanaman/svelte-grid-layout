@@ -1,22 +1,22 @@
-# svelte-layout-grid
+# @bourka/svelte-layout
 
 Draggable, resizable, responsive grid layouts for Svelte 5. The package is built as a Svelte library, ships typed components, and keeps the public API split into explicit subpath exports so apps can import only what they use.
 
 ## Install
 
 ```sh
-pnpm add svelte-layout-grid
+pnpm add @bourka/svelte-layout
 ```
 
 ```sh
-npm install svelte-layout-grid
+npm install @bourka/svelte-layout
 ```
 
 ## Basic Usage
 
 ```svelte
 <script lang="ts">
-  import { GridLayout, WidthProvider, type Layout } from "svelte-layout-grid";
+  import { GridLayout, WidthProvider, type Layout } from "@bourka/svelte-layout";
 
   let layout = $state<Layout>([
     { i: "revenue", x: 0, y: 0, w: 4, h: 2 },
@@ -54,7 +54,7 @@ npm install svelte-layout-grid
 
 ```svelte
 <script lang="ts">
-  import { ResponsiveGridLayout, WidthProvider, type ResponsiveLayouts } from "svelte-layout-grid";
+  import { ResponsiveGridLayout, WidthProvider, type ResponsiveLayouts } from "@bourka/svelte-layout";
 
   let layouts = $state<ResponsiveLayouts>({
     lg: [
@@ -98,16 +98,16 @@ import {
   type Layout,
   type LayoutItem,
   type ResponsiveLayouts,
-} from "svelte-layout-grid";
+} from "@bourka/svelte-layout";
 ```
 
 Use subpath entry points when you want a narrower import surface:
 
 ```ts
-import { GridLayout, type Layout } from "svelte-layout-grid/grid-layout";
-import { Draggable } from "svelte-layout-grid/draggable";
-import { Resizable } from "svelte-layout-grid/resizable";
-import { getCompactor } from "svelte-layout-grid/core";
+import { GridLayout, type Layout } from "@bourka/svelte-layout/grid-layout";
+import { Draggable } from "@bourka/svelte-layout/draggable";
+import { Resizable } from "@bourka/svelte-layout/resizable";
+import { getCompactor } from "@bourka/svelte-layout/core";
 ```
 
 The package export map is explicit. Internal reference code and demo routes are not exported, and `dist/react-version/**` is excluded from the npm package.
@@ -126,7 +126,7 @@ The main configuration objects are:
 
 ## Publishing
 
-The package name is set to `svelte-layout-grid` and `publishConfig.access` is public. Build and inspect the package before publishing:
+The package name is set to `@bourka/svelte-layout` and `publishConfig.access` is public. Build and inspect the package before publishing:
 
 ```sh
 pnpm pack

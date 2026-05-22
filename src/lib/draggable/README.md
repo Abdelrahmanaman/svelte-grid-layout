@@ -1,6 +1,6 @@
-# svelte-draggable
+# @bourka/svelte-layout/draggable
 
-A high-performance Svelte 5 port of the popular `react-draggable` library. Built from the ground up using **Runes** (`$state`, `$derived`, `$props`) and **Attachments** (`{@attach}`).
+A high-performance draggable utility for Svelte 5. Built from the ground up using **Runes** (`$state`, `$derived`, `$props`) and **Attachments** (`{@attach}`).
 
 ## Features
 
@@ -13,9 +13,9 @@ A high-performance Svelte 5 port of the popular `react-draggable` library. Built
 ## Installation
 
 ```bash
-npm install svelte-draggable
+npm install @bourka/svelte-layout
 # or
-pnpm add svelte-draggable
+pnpm add @bourka/svelte-layout
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ pnpm add svelte-draggable
 
 ```svelte
 <script>
-  import { Draggable } from 'svelte-draggable';
+  import { Draggable } from '@bourka/svelte-layout/draggable';
 </script>
 
 <Draggable bounds="parent">
@@ -40,7 +40,7 @@ pnpm add svelte-draggable
 
 ```svelte
 <script>
-  import { draggable } from 'svelte-draggable';
+  import { draggable } from '@bourka/svelte-layout/draggable';
 </script>
 
 <div {@attach draggable({ axis: 'x', grid: [25, 25] })}>

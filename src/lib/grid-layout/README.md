@@ -1,6 +1,6 @@
 # Grid Layout
 
-The grid-layout entry point contains the dashboard layout components and the layout types used by `svelte-layout-grid`.
+The grid-layout entry point contains the dashboard layout components and the layout types used by `@bourka/svelte-layout`.
 
 ```ts
 import {
@@ -11,7 +11,7 @@ import {
   type Layout,
   type LayoutItem,
   type ResponsiveLayouts,
-} from "svelte-layout-grid/grid-layout";
+} from "@bourka/svelte-layout/grid-layout";
 ```
 
 ## Components
@@ -26,7 +26,7 @@ import {
 
 ```svelte
 <script lang="ts">
-  import { GridLayout, WidthProvider, type Layout } from "svelte-layout-grid/grid-layout";
+  import { GridLayout, WidthProvider, type Layout } from "@bourka/svelte-layout/grid-layout";
 
   let layout = $state<Layout>([
     { i: "a", x: 0, y: 0, w: 4, h: 2, minW: 2, minH: 2 },
@@ -61,7 +61,7 @@ import {
     ResponsiveGridLayout,
     WidthProvider,
     type ResponsiveLayouts,
-  } from "svelte-layout-grid/grid-layout";
+  } from "@bourka/svelte-layout/grid-layout";
 
   let layouts = $state<ResponsiveLayouts>({
     lg: [{ i: "a", x: 0, y: 0, w: 6, h: 2 }],
@@ -144,7 +144,7 @@ import {
   fastVerticalCompactor,
   fastHorizontalCompactor,
   wrapCompactor,
-} from "svelte-layout-grid/grid-layout";
+} from "@bourka/svelte-layout/grid-layout";
 ```
 
 Pass a compactor to `GridLayout` or `ResponsiveGridLayout`:
@@ -162,5 +162,5 @@ Pass a compactor to `GridLayout` or `ResponsiveGridLayout`:
 The grid components import their required CSS. If an app needs the stylesheet directly, it is exported as:
 
 ```ts
-import "svelte-layout-grid/grid-layout/style.css";
+import "@bourka/svelte-layout/grid-layout/style.css";
 ```

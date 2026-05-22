@@ -1,6 +1,6 @@
-# svelte-resizable
+# @bourka/svelte-layout/resizable
 
-A powerful Svelte 5 port of the popular `react-resizable` library. Built using **Runes** (`$state`, `$derived`, `$props`) and powered by `svelte-draggable`.
+A powerful resizable UI primitive for Svelte 5. Built using **Runes** (`$state`, `$derived`, `$props`) and powered by the draggable utilities in this package.
 
 ## Features
 
@@ -9,14 +9,14 @@ A powerful Svelte 5 port of the popular `react-resizable` library. Built using *
 - **Fully Typed**: Written in TypeScript with comprehensive TSDoc documentation.
 - **8-Way Resizing**: Supports all directions (`n`, `s`, `e`, `w`, `ne`, `nw`, `se`, `sw`).
 - **Constraints**: Easily set `minConstraints`, `maxConstraints`, and `lockAspectRatio`.
-- **Zero Dependencies**: Lightweight and efficient (requires `svelte-draggable`).
+- **Zero Dependencies**: Lightweight and efficient (uses the draggable utilities in this package).
 
 ## Installation
 
 ```bash
-npm install svelte-resizable svelte-draggable
+npm install @bourka/svelte-layout
 # or
-pnpm add svelte-resizable svelte-draggable
+pnpm add @bourka/svelte-layout
 ```
 
 ## Usage
@@ -27,7 +27,7 @@ The `<ResizableBox />` component manages its own size state internally.
 
 ```svelte
 <script>
-  import { ResizableBox } from 'svelte-resizable';
+  import { ResizableBox } from '@bourka/svelte-layout/resizable';
 </script>
 
 <ResizableBox
@@ -50,7 +50,7 @@ The `<Resizable />` component gives you full control. You must manage the `width
 
 ```svelte
 <script>
-  import { Resizable } from 'svelte-resizable';
+  import { Resizable } from '@bourka/svelte-layout/resizable';
   let width = $state(200);
   let height = $state(200);
 </script>

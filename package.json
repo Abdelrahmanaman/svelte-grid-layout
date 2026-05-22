@@ -1,6 +1,6 @@
 {
-  "name": "svelte-layout-grid",
-  "version": "0.0.1",
+  "name": "@bourka/svelte-layout",
+  "version": "1.0.1",
   "description": "A Svelte 5 draggable, resizable, responsive grid layout library.",
   "keywords": [
     "dashboard",
@@ -11,6 +11,14 @@
     "svelte",
     "sveltekit"
   ],
+  "homepage": "https://github.com/Abdelrahmanaman/svelte-grid-layout#readme",
+  "bugs": {
+    "url": "https://github.com/Abdelrahmanaman/svelte-grid-layout/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abdelrahmanaman/svelte-grid-layout.git"
+  },
   "files": [
     "dist",
     "README.md",
